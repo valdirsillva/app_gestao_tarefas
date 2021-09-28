@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tarefa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TarefaController extends Controller
 {
@@ -20,9 +21,17 @@ class TarefaController extends Controller
      */
     public function index()
     {
-        echo "Bem-vindo ao nosso sistema !";
-    }
+        if (Auth::check()) {
+            $userId = Auth::user()->id;
+            $userName = Auth::user()->name;
+            $userEmail = Auth::user()->email;
 
+            return "Usuário logado ! IdUsuario => {$userId}, {$userName}, {$userEmail} ";
+        }
+
+        return 'Você precisa seu autenticar no sistema';
+    }
+ 
     /**
      * Show the form for creating a new resource.
      *
