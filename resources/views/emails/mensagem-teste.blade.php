@@ -3,6 +3,11 @@
 
 O corpo da mensagem.
 
+- Opção 1
+- Opção 2
+_ Opção 3
+
+
 @component('mail::button', ['url' => ''])
 Texto do botão
 @endcomponent
