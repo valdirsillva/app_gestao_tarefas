@@ -23,9 +23,13 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('tarefa', 'App\Http\Controllers\TarefaController');
 
-Route::get('mensagem-teste', function() {
+Route::get('/mensagem', function() {
+
+    Mail::to('valdir.developervs@gmail.com')->send( new MensagemTesteMail() );
+
+    return 'E-mail enviado com sucesso';
     
-    return new MensagemTesteMail();
+    // return new MensagemTesteMail();
 });
 
 
