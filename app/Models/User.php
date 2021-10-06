@@ -8,10 +8,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 use App\Notifications\RedefinirSenhaNotification;
+use App\Notification\VerificarEmailNotification;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
+
 
     /**
      * The attributes that are mass assignable.
@@ -45,9 +47,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
 
 
+
     public function sendPasswordResetNotification($token)
     {
        // recebe um objeto de notificacao
        $this->notify( new RedefinirSenhaNotification($token, $this->email, $this->name));
+    }
+
+    public function senEmailVerificationNotification()
+    {
+        $this->notify( new VerificarEmailNotification($this->name) );
     }
 }
