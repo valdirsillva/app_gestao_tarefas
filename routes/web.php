@@ -22,11 +22,11 @@ Auth::routes(['verify' => true]);
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
 ->name('home')
-->middlware('verified');
+->middleware('verified');
 
 
 Route::resource('tarefa', 'App\Http\Controllers\TarefaController')
-->middlware('verified');;
+->middleware('verified');;
 
 Route::get('/mensagem', function() {
 
