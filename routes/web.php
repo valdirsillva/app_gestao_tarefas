@@ -18,17 +18,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('tarefa', 'App\Http\Controllers\TarefaController');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])
+->name('home')
+->middlware('verified');
+
+
+Route::resource('tarefa', 'App\Http\Controllers\TarefaController')
+->middlware('verified');;
 
 Route::get('/mensagem', function() {
 
     Mail::to('valdir.developervs@gmail.com')->send( new MensagemTesteMail() );
 
     return 'E-mail enviado com sucesso';
-    
+
     // return new MensagemTesteMail();
 });
 
