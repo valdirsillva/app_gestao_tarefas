@@ -23,15 +23,10 @@ class TarefaController extends Controller
      */
     public function index()
     {
-        if (Auth::check()) {
-            $userId = Auth::user()->id;
-            $userName = Auth::user()->name;
-            $userEmail = Auth::user()->email;
+        $user_id = auth()->user()->id;
 
-            return "Usuário logado ! IdUsuario => {$userId}, {$userName}, {$userEmail} ";
-        }
-
-        return 'Você precisa seu autenticar no sistema';
+        $tarefas = Tarefa::where('user_id', $user_id)->get();
+        return view('tarefa.index', ['tarefas' => $tarefas]);
     }
 
     /**
