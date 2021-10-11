@@ -15,15 +15,21 @@
                                <th>Tarefa</th>
                                <th>Data limite conclusão</th>
                                <th></th>
+                               <th></th>
                            </tr>
                        </thead>
                        <tbody>
                            @foreach($tarefas as $key => $t)
                             <tr>
-                               <td>{{ $t['id']}}</td>
+                               <td>{{ $t['id'] }}</td>
                                <td>{{ $t['tarefa'] }}</td>
                                <td>{{ date('d/m/y', strtotime($t['data_limite_conclusao'])) }}</td>
                                <td><a href="{{ route('tarefa.edit', $t['id'])}}" >Editar ></a></td>
+                               <td>
+                                  <form id="form_{{$t['id'] }}" method="post" action="{{ route('tarefa.destroy', ['tarefa' => $t['id']]) }}">
+                                    @method('DELETE')
+                                    @csrf
+                               <a href="#" onclick="document.getElementById('form_{{$t['id']}}').submit()" >Excluir</a></td>
                            </tr>
                            @endforeach
                        </tbody>
